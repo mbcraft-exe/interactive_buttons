@@ -2,12 +2,17 @@ from pynput import keyboard
 from interactive_buttons import ib_exceptions
 
 # Define ANSI escape codes for highlighting and resetting text
-HIGHLIGHT = "\033[7m"
-RESET = "\033[0m"
-SPACES = "     "
+class Variables:
+    """
+    Edit variables to customize selection menu.
+    ANSI codes can be used with colorama Fore.
+    """
+    HIGHLIGHT = "\033[7m"  # Text/background color (defalut black on white)
+    RESET = "\033[0m"
+    SPACES = "     "  # Number of spaces between each buttons
+    DECORATOR = ["[", "]"]  # Decoration between each buttons
 
 def linear_buttons(buttons: list):
-    global highlighted_buttons
     """
     Display linear buttons with highlighting and handle user input.
 
@@ -19,8 +24,8 @@ def linear_buttons(buttons: list):
         ib_exceptions.MissingRequiredArgument: If a button element has less than 2 arguments.
         ib_exceptions.TooMuchArguments: If a button element has more than 3 arguments.
     """
-
-    highlighted_buttons = HIGHLIGHT  # Initialize with highlighting
+    global highlighted_buttons
+    highlighted_buttons = Variables.HIGHLIGHT  # Initialize with highlighting
 
     # Loop through the list of buttons and validate their format
     for button_elements in buttons:
@@ -31,7 +36,14 @@ def linear_buttons(buttons: list):
                 "Useless arguments\nMust be ['button_name', 'function_name', 'function_arguments'=None]")
 
         # Highlight and add button names to the index string
-        highlighted_buttons += f"[{button_elements[0]}]{RESET}     "
+        if len(Variables.DECORATOR) == 2:
+            highlighted_buttons += f"{Variables.DECORATOR[0]}{button_elements[0]}{Variables.DECORATOR[1]}{Variables.RESET}     "
+        elif len(Variables.DECORATOR) == 1:
+            highlighted_buttons += f"{Variables.DECORATOR[0]}{button_elements[0]}{Variables.RESET}     "
+        elif len(Variables.DECORATOR) == 0:
+            highlighted_buttons += f"{button_elements[0]}{Variables.RESET}     "
+        else:
+            raise ib_exceptions("Variables.DECORATOR length must be between 0 and 2 not more.")
 
     # Print the highlighted index string
     print(highlighted_buttons, end='', flush=True)
@@ -49,7 +61,7 @@ def linear_buttons(buttons: list):
         global highlighted_buttons
 
         for index, element in enumerate(button_list):
-            if HIGHLIGHT in element:
+            if Variables.HIGHLIGHT in element:
                 return index
 
     def change_highlighted_index(new_index_value):
@@ -61,11 +73,11 @@ def linear_buttons(buttons: list):
         """
         global highlighted_buttons
 
-        cleaned_selector = highlighted_buttons.replace(HIGHLIGHT, "").replace(RESET, "")
-        buttons_list = cleaned_selector.split(SPACES)
+        cleaned_selector = highlighted_buttons.replace(Variables.HIGHLIGHT, "").replace(Variables.RESET, "")
+        buttons_list = cleaned_selector.split(Variables.SPACES)
 
         index = buttons_list[new_index_value]
-        buttons_list[new_index_value] = f"{HIGHLIGHT}{index}{RESET}"
+        buttons_list[new_index_value] = f"{Variables.HIGHLIGHT}{index}{Variables.RESET}"
 
         highlighted_buttons = "     ".join(buttons_list)
         print(f"\r{highlighted_buttons}", end='', flush=True)
@@ -76,9 +88,9 @@ def linear_buttons(buttons: list):
         """
         global highlighted_buttons
 
-        current_index = get_highlighted_index(highlighted_buttons.split(SPACES))
+        current_index = get_highlighted_index(highlighted_buttons.split(Variables.SPACES))
         if current_index - 1 < 0:
-            change_highlighted_index(len(highlighted_buttons.split(SPACES)) - 2)
+            change_highlighted_index(len(highlighted_buttons.split(Variables.SPACES)) - 2)
         else:
             change_highlighted_index(current_index - 1)
 
@@ -88,7 +100,7 @@ def linear_buttons(buttons: list):
         """
         global highlighted_buttons
 
-        current_index = get_highlighted_index(highlighted_buttons.split(SPACES))
+        current_index = get_highlighted_index(highlighted_buttons.split(Variables.SPACES))
         if len(button_elements) > current_index - 1:
             change_highlighted_index(current_index + 1)
         else:
@@ -100,7 +112,7 @@ def linear_buttons(buttons: list):
         """
         global highlighted_buttons
 
-        selected_index = get_highlighted_index(highlighted_buttons.split(SPACES))
+        selected_index = get_highlighted_index(highlighted_buttons.split(Variables.SPACES))
         function_to_execute = buttons[selected_index][1]
         print("\n", end="")
 
