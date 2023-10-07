@@ -18,6 +18,23 @@ Here's an example of how to use the library to create interactive buttons:
 ```python
 from interactive_buttons import linear_buttons
 
+# Change button color :
+# Way 1 :
+linear_buttons.Variables.HIGHLIGHT = "\033[30;43m"  # Yellow background
+# Way 2 :
+from colorama import Fore, Back  # Needs to be installed by running the command `pip install colorama`
+linear_buttons.Variables.HIGHLIGHT = Back.RED + Fore.BLACK  # Red background and Black text
+
+# Change decorator (in [button text] the square brackets are the decorators) :
+# Way 1 :
+linear_buttons.Variables.DECORATOR = ["<", ">"]  # [button text] -> <button text>
+# Way 2 :
+linear_buttons.Variables.DECORATOR = []  # [button text] -> button text
+# Way 3 :
+linear_buttons.Variables.DECORATOR = ["> "]  # [button text] ->  > button text
+
+
+
 # Define button configurations as a list
 button_configurations = [
     ['Button 1', function_1],
