@@ -7,6 +7,7 @@ RESET = "\033[0m"
 SPACES = "     "
 
 def linear_buttons(buttons: list):
+    global highlighted_buttons
     """
     Display linear buttons with highlighting and handle user input.
 
@@ -45,6 +46,8 @@ def linear_buttons(buttons: list):
         Returns:
             int: Index of the currently highlighted option.
         """
+        global highlighted_buttons
+
         for index, element in enumerate(button_list):
             if HIGHLIGHT in element:
                 return index
@@ -56,6 +59,8 @@ def linear_buttons(buttons: list):
         Args:
             new_index_value (int): The new index to highlight.
         """
+        global highlighted_buttons
+
         cleaned_selector = highlighted_buttons.replace(HIGHLIGHT, "").replace(RESET, "")
         buttons_list = cleaned_selector.split(SPACES)
 
@@ -69,6 +74,8 @@ def linear_buttons(buttons: list):
         """
         Move the selection index backward.
         """
+        global highlighted_buttons
+
         current_index = get_highlighted_index(highlighted_buttons.split(SPACES))
         if current_index - 1 < 0:
             change_highlighted_index(len(highlighted_buttons.split(SPACES)) - 2)
@@ -79,8 +86,10 @@ def linear_buttons(buttons: list):
         """
         Move the selection index forward.
         """
+        global highlighted_buttons
+
         current_index = get_highlighted_index(highlighted_buttons.split(SPACES))
-        if len(button_elements) > current_index + 1:
+        if len(button_elements) > current_index - 1:
             change_highlighted_index(current_index + 1)
         else:
             change_highlighted_index(0)
@@ -89,6 +98,8 @@ def linear_buttons(buttons: list):
         """
         Execute the selected function.
         """
+        global highlighted_buttons
+
         selected_index = get_highlighted_index(highlighted_buttons.split(SPACES))
         function_to_execute = buttons[selected_index][1]
         print("\n", end="")
@@ -112,6 +123,8 @@ def linear_buttons(buttons: list):
         Args:
             key (keyboard.Key): The key that was pressed.
         """
+        global highlighted_buttons
+
         if key == keyboard.Key.left:
             move_selection_backward()
         elif key == keyboard.Key.right:
