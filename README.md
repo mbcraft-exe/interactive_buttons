@@ -44,7 +44,7 @@ button_configurations = [
 # Create linear buttons and start the interactive interface
 linear_buttons(button_configurations)
 ```
-### Output examples 
+### Output example
 ![](https://cdn.discordapp.com/attachments/946745366395621379/1160349182255710248/image.png?ex=65345663&is=6521e163&hm=bd800369153eabe30b340cfee3ede6a4002dcb630218a8ffe1245e7f40201e16&)
 
 
