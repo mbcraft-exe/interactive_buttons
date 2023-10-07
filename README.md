@@ -32,6 +32,6 @@ linear_buttons(button_configurations)
 
 The Interactive Buttons library allows you to easily create interactive buttons for user interaction in your Python applications. It provides a simple and intuitive way to create a list of buttons, associate them with functions, and navigate through them using the keyboard. This library is particularly useful for creating text-based interactive menus and interfaces.
 
-## GitHub Repository
+## PyPi Repository
 
-Check out the [GitHub repository](https://github.com/mbcraft-exe/interactive_buttons) for the latest updates, issues, and contributions. Feel free to contribute to the project or report any issues you encounter.
+Check out the [PyPi repository](https://pypi.org/project/interactive-buttons/) for the latest update !
