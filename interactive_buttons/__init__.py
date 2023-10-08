@@ -134,7 +134,7 @@ def linear_buttons(buttons: list, output=True):
         Handle keypress events.
 
         Args:
-            key (keyboard.Key): The key that was pressed.
+            key (keyboard.Key): The key that was pressed. 
         """
         global highlighted_buttons, _OUTPUT
 
