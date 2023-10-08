@@ -1,5 +1,6 @@
 from pynput import keyboard
 from interactive_buttons import ib_exceptions
+_OUTPUT = None
 
 # Define ANSI escape codes for highlighting and resetting text
 class Variables:
@@ -12,7 +13,7 @@ class Variables:
     SPACES = "     "  # Number of spaces between each buttons
     DECORATOR = ["[", "]"]  # Decoration between each buttons
 
-def linear_buttons(buttons: list):
+def linear_buttons(buttons: list, output=True):
     """
     Display linear buttons with highlighting and handle user input.
 
@@ -24,7 +25,7 @@ def linear_buttons(buttons: list):
         ib_exceptions.MissingRequiredArgument: If a button element has less than 2 arguments.
         ib_exceptions.TooMuchArguments: If a button element has more than 3 arguments.
     """
-    global highlighted_buttons
+    global highlighted_buttons, _OUTPUT
     highlighted_buttons = Variables.HIGHLIGHT  # Initialize with highlighting
 
     # Loop through the list of buttons and validate their format
@@ -120,11 +121,11 @@ def linear_buttons(buttons: list):
         if len(buttons[selected_index]) == 3:
             args = buttons[selected_index][2]
             if type(args) is tuple:
-                function_to_execute(*args)
+                return function_to_execute(*args)
             else:
-                function_to_execute(args)
+                return function_to_execute(args)
         else:
-            function_to_execute()
+            return function_to_execute()
 
         return True
 
@@ -135,16 +136,19 @@ def linear_buttons(buttons: list):
         Args:
             key (keyboard.Key): The key that was pressed.
         """
-        global highlighted_buttons
+        global highlighted_buttons, _OUTPUT
 
         if key == keyboard.Key.left:
             move_selection_backward()
         elif key == keyboard.Key.right:
             move_selection_forward()
         elif key == keyboard.Key.enter:
-            execute_selected_function()
-            exit()
+            _OUTPUT = execute_selected_function()
+            return False
 
     # Start listening for keypress events
     with keyboard.Listener(on_press=on_key_press) as listener:
         listener.join()
+
+    if output is True:
+        return _OUTPUT
