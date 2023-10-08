@@ -7,9 +7,9 @@ class Variables:
     Edit variables to customize selection menu.
     ANSI codes can be used with colorama Fore.
     """
-    HIGHLIGHT = "\033[7m"  # Text/background color (default black on white)
+    HIGHLIGHT = "\033[7m"  # Text/background color (defalut black on white)
     RESET = "\033[0m"
-    SPACES = "     "  # Number of spaces between each buttons (default 5)
+    SPACES = "     "  # Number of spaces between each buttons
     DECORATOR = ["[", "]"]  # Decoration between each buttons
 
 def linear_buttons(buttons: list):
@@ -101,7 +101,7 @@ def linear_buttons(buttons: list):
         global highlighted_buttons
 
         current_index = get_highlighted_index(highlighted_buttons.split(Variables.SPACES))
-        if len(button_elements) > current_index - 1:
+        if len(buttons) - 1 > current_index:
             change_highlighted_index(current_index + 1)
         else:
             change_highlighted_index(0)
