@@ -78,6 +78,34 @@ column_buttons(buttons)
 ### Output example 
 ![](https://cdn.discordapp.com/attachments/946745366395621379/1161044163450650814/image.png?ex=6536dda3&is=652468a3&hm=c6fbbeb849d612a77e98fd798df56cc65536575a096f8ae8b27e1f5d402583d0&)
 
+#### Example with `matrix_buttons` :
+### ⚠️ WARNING : To use this function, you must not use an emulated terminal.
+
+```python
+from interactive_buttons import *
+from colorama import Fore, Back
+
+Variables.SPACES += Variables.SPACES
+Variables.HIGHLIGHT = Back.RED + Fore.BLACK
+
+def say(message):
+    print(message)
+    return message
+    
+
+matrix = [
+          [dict(name="Button A Line 1", function=say, args="A1"), dict(name="Button B Line 1", function=say, args="B1")],
+          [dict(name="Button A Line 2", function=say, args="A2"), dict(name="Button B Line 2", function=say, args="B2")],
+        ]
+
+output = matrix_buttons(matrix)
+print(output)  # You can now get the returned value of your function
+```
+
+### Output example 
+![](https://cdn.discordapp.com/attachments/946745366395621379/1161788627983020053/image.png?ex=653992f9&is=65271df9&hm=29f75483020d6fb869a445e13822d2e17234cd2e4ece4db6bbf9715131524a6e&)
+
+
 ## Project Description
 
 The Interactive Buttons library allows you to easily create interactive buttons for user interaction in your Python applications. It provides a simple and intuitive way to create a list of buttons, associate them with functions, and navigate through them using the keyboard. This library is particularly useful for creating text-based interactive menus and interfaces.
