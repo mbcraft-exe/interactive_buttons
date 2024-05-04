@@ -49,7 +49,7 @@ buttons = [dict(name="Button 1", function=func1, args=("Hello !")),
 linear_buttons(buttons)
 ```
 ### Output example 
-![](https://cdn.discordapp.com/attachments/946745366395621379/1160349182255710248/image.png?ex=65345663&is=6521e163&hm=bd800369153eabe30b340cfee3ede6a4002dcb630218a8ffe1245e7f40201e16&)
+![](https://github.com/mbcraft-exe/interactive_buttons/blob/main/assets/linear.png)
 
 
 #### Example with `column_buttons` :
@@ -76,7 +76,7 @@ column_buttons(buttons)
 ```
 
 ### Output example 
-![](https://cdn.discordapp.com/attachments/946745366395621379/1161044163450650814/image.png?ex=6536dda3&is=652468a3&hm=c6fbbeb849d612a77e98fd798df56cc65536575a096f8ae8b27e1f5d402583d0&)
+![](https://github.com/mbcraft-exe/interactive_buttons/blob/main/assets/column.png)
 
 #### Example with `matrix_buttons` :
 ### ⚠️ WARNING : To use this function, you must not use an emulated terminal.
@@ -103,7 +103,7 @@ print(output)  # You can now get the returned value of your function
 ```
 
 ### Output example 
-![](https://cdn.discordapp.com/attachments/946745366395621379/1161788627983020053/image.png?ex=653992f9&is=65271df9&hm=29f75483020d6fb869a445e13822d2e17234cd2e4ece4db6bbf9715131524a6e&)
+![](https://github.com/mbcraft-exe/interactive_buttons/blob/main/assets/matrix.png)
 
 
 ## Project Description
